@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hole</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet-src.js"></script>
+    <script type="text/javascript" src="dist/leaflet.draw-src.js"></script>
+
+    <style type="text/css">
+        #map {
+            height: 800px;
+            width: 800px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="map"></div>
+
+    <script type="text/javascript">
+        var coords = [
+            [ [0, 0], [0, 1], [1, 1], [1, 0], [0, 0] ],
+            [ [0.25, 0.25], [0.25, 0.75], [0.75, 0.75], [0.75, 0.25], [0.25, 0.25] ]
+        ];
+
+        var map = L.map("map").setView([0.5, 0.5], 9);
+        var polygonWithHole = new L.Polygon(coords);
+
+        drawnItems = new L.FeatureGroup().addTo(map);
+        edit = new L.EditToolbar.Edit(map, {
+            featureGroup: drawnItems,
+            poly: {
+                allowIntersection : false
+            },
+            selectedPathOptions: L.EditToolbar.prototype.options.edit.selectedPathOptions
+        });
+        polygonWithHole.addTo(drawnItems);
+    </script>
+</body>
+</html>

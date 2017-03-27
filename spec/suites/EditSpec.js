@@ -78,10 +78,11 @@ describe("L.Edit", function () {
 		it("Should revert to original styles when editing is toggled.", function () {
 			var originalOptions = L.extend({maintainColor: false, poly : {allowIntersection: false} }, poly.options);
 
+			console.log(JSON.stringify(originalOptions));
 			drawnItems.addLayer(poly);
 			edit.enable();
 			edit.disable();
-
+			console.log(JSON.stringify(poly.options));
 			expect(poly.options).to.eql(originalOptions);
 		});
 
@@ -94,6 +95,19 @@ describe("L.Edit", function () {
 			expect(poly.options.poly.allowIntersection).to.equal(false);
 
 		});
+/*
+		it("Should allow to edit holes in polygon.", function () {
+			var coords = [
+	            [ [0, 0], [0, 1], [1, 1], [1, 0], [0, 0] ],
+	            [ [0.25, 0.25], [0.25, 0.75], [0.75, 0.75], [0.75, 0.25], [0.25, 0.25] ]
+	        ];
+			var polygonWithHole = new L.Polygon(coords).addTo(map);
 
+			polygonWithHole.editing.enable();
+
+			var markerCount = map.getContainer().getElementsByClassName("leaflet-marker-icon").length;
+
+			expect(markerCount).to.eql(16);
+		}); */
 	});
 });

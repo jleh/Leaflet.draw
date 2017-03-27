@@ -11,7 +11,7 @@ L.Edit.Poly = L.Handler.extend({
 	// @method initialize(): void
 	initialize: function (poly, options) {
 
-		this.latlngs = [poly._latlngs];
+		this.latlngs = poly._latlngs;
 		if (poly._holes) {
 			this.latlngs = this.latlngs.concat(poly._holes);
 		}
